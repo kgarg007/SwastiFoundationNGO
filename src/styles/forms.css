@@ -1,0 +1,41 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.form-field em {
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-ink-soft);
+  font-size: var(--fs-caption);
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  width: 100%;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--color-accent);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}

@@ -1,0 +1,27 @@
+.section {
+  padding-block: var(--space-2xl);
+}
+
+.section--base {
+  background: var(--color-bg);
+}
+
+.section--alt {
+  background: var(--color-surface-alt);
+}
+
+.section--deep {
+  background: var(--color-green-dark);
+  color: #fff;
+}
+
+.section--deep h2,
+.section--deep h3 {
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: var(--space-xl);
+  }
+}

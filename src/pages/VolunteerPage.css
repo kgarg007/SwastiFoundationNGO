@@ -1,0 +1,149 @@
+@import "../styles/forms.css";
+
+.volunteer-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.volunteer-intro__why h2 {
+  font-size: var(--fs-display-sm);
+  margin-bottom: var(--space-md);
+}
+
+.volunteer-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.volunteer-benefits li {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  color: var(--color-ink-soft);
+  line-height: var(--lh-relaxed);
+}
+
+.volunteer-benefits__bullet {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-green-pale);
+  color: var(--color-green-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+}
+
+.volunteer-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.volunteer-form h2 {
+  font-size: var(--fs-display-sm);
+  margin-bottom: var(--space-md);
+}
+
+.volunteer-form__success {
+  margin-top: var(--space-sm);
+  color: var(--color-green-dark);
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+}
+
+.volunteer-form__upload {
+  margin-bottom: var(--space-md);
+}
+
+.volunteer-form__upload-label {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+  margin-bottom: 0.35rem;
+}
+
+.volunteer-form__upload-box {
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: var(--fs-body-sm);
+}
+
+
+
+.volunteer-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.volunteer-team-card {
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.volunteer-team-card__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-inline: auto;
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-green) 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.volunteer-team-card h3 {
+  font-size: var(--fs-body);
+  margin-bottom: 0.2rem;
+}
+
+.volunteer-team-card p {
+  font-size: var(--fs-caption);
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 900px) {
+  .volunteer-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .volunteer-team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Volunteer Page Left-alignment and Tight Spacing */
+.volunteer-hero {
+  text-align: left;
+  padding-block: var(--space-xl) var(--space-xs);
+}
+
+.volunteer-hero .page-hero__sub {
+  margin-inline: 0 auto;
+}
+
+.volunteer-section {
+  padding-top: var(--space-xs);
+}

@@ -1,0 +1,88 @@
+.founder-message {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.founder-message__placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-green) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 3rem;
+}
+
+.founder-message__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  margin-bottom: var(--space-sm);
+}
+
+
+
+.founder-message__quote {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-sm);
+  line-height: var(--lh-snug);
+  margin-bottom: var(--space-sm);
+}
+
+.founder-message__body {
+  font-size: var(--fs-body);
+  color: var(--color-ink-soft);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-md);
+}
+
+.founder-message__closing {
+  font-size: var(--fs-body-sm);
+  color: var(--color-ink-soft);
+  margin-bottom: 0.1rem;
+}
+
+.founder-message__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+}
+
+.founder-message__role {
+  font-size: var(--fs-body-sm);
+  color: var(--color-ink-soft);
+}
+
+.founder-message__link {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+  color: var(--color-green-dark);
+}
+
+
+
+.founder-message__link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .founder-message {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .founder-message__placeholder {
+    width: 140px;
+    margin-inline: auto;
+  }
+}

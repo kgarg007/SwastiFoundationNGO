@@ -1,0 +1,41 @@
+.values-strip {
+  background: linear-gradient(90deg, var(--color-saffron) 0%, var(--color-saffron-dark) 35%, var(--color-green) 65%, var(--color-green-dark) 100%);
+  color: #fff;
+}
+
+.values-strip__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding-block: var(--space-sm);
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.values-strip__hi {
+  font-family: var(--font-hindi);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.values-strip__divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.values-strip__en {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+
+@media (max-width: 480px) {
+  .values-strip__divider {
+    display: none;
+  }
+}
