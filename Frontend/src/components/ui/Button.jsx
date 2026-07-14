@@ -1,6 +1,9 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Button.css";
+
+const MotionLink = motion.create(Link);
 
 /**
  * Reusable Button. Renders as <button>, <Link> (internal), or <a> (external)
@@ -19,26 +22,32 @@ const Button = forwardRef(function Button(
     </>
   );
 
+  const motionProps = {
+    whileHover: { scale: 1.02, y: -2 },
+    whileTap: { scale: 0.98, y: 0 },
+    transition: { type: "spring", stiffness: 400, damping: 17 }
+  };
+
   if (to) {
     return (
-      <Link to={to} className={classes} ref={ref} {...rest}>
+      <MotionLink to={to} className={classes} ref={ref} {...motionProps} {...rest}>
         {content}
-      </Link>
+      </MotionLink>
     );
   }
 
   if (href) {
     return (
-      <a href={href} className={classes} ref={ref} {...rest}>
+      <motion.a href={href} className={classes} ref={ref} {...motionProps} {...rest}>
         {content}
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <button type={rest.type || "button"} className={classes} ref={ref} {...rest}>
+    <motion.button type={rest.type || "button"} className={classes} ref={ref} {...motionProps} {...rest}>
       {content}
-    </button>
+    </motion.button>
   );
 });
 

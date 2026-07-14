@@ -5,9 +5,10 @@
 }
 
 .about-story__block h3 {
+  font-family: var(--font-display);
   font-size: var(--fs-display-sm);
   margin-bottom: var(--space-xs);
-  color: var(--color-green-dark);
+  color: var(--color-primary);
 }
 
 
@@ -28,12 +29,12 @@
   font-family: var(--font-display);
   font-size: var(--fs-display-sm);
   margin-bottom: var(--space-sm);
-  color: #f3c89a;
+  color: var(--color-accent);
 }
 
 .mission-vision__col p {
   line-height: var(--lh-relaxed);
-  color: #e3ece6;
+  color: #e5e7eb;
 }
 
 .mission-vision__extended {
@@ -92,19 +93,20 @@
 }
 
 .leadership-card__avatar {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   margin-inline: auto;
   margin-bottom: var(--space-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-green) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: #fff;
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
+  box-shadow: var(--shadow-sm);
 }
 
 .leadership-card__name {
@@ -139,8 +141,9 @@
 }
 
 .org-details__row dt {
+  font-family: var(--font-display);
   font-weight: 600;
-  color: var(--color-green-dark);
+  color: var(--color-primary-dark);
 }
 
 
@@ -161,7 +164,7 @@
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-green) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,6 +172,7 @@
   font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 700;
+  box-shadow: var(--shadow-sm);
 }
 
 .founders-desk__eyebrow {
@@ -177,12 +181,12 @@
   font-size: var(--fs-caption);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #f3c89a;
+  color: var(--color-accent);
   margin-bottom: var(--space-md);
 }
 
 .founders-desk__content p {
-  color: #e3ece6;
+  color: #e5e7eb;
   line-height: var(--lh-relaxed);
   margin-bottom: var(--space-sm);
 }
@@ -207,7 +211,7 @@
 }
 
 .founders-desk__role {
-  color: #c4d4cb !important;
+  color: #9ca3af !important;
   font-size: var(--fs-body-sm);
 }
 

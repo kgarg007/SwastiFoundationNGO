@@ -1,5 +1,7 @@
 .section {
   padding-block: var(--space-2xl);
+  position: relative;
+  z-index: 1;
 }
 
 .section--base {
@@ -8,11 +10,39 @@
 
 .section--alt {
   background: var(--color-surface-alt);
+  position: relative;
+}
+
+.section--alt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.4;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .section--deep {
-  background: var(--color-green-dark);
+  background: var(--color-primary-dark);
   color: #fff;
+  position: relative;
+}
+
+.section--deep::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .section--deep h2,

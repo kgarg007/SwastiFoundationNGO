@@ -5,8 +5,8 @@
   height: var(--header-height);
   display: flex;
   align-items: center;
-  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
-  backdrop-filter: blur(10px);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid transparent;
   transition: border-color var(--duration-base) var(--ease-standard),
     background-color var(--duration-base) var(--ease-standard);
@@ -43,17 +43,18 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-saffron) 0%, var(--color-green) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: #fff;
   font-family: var(--font-hindi);
   font-weight: 700;
   font-size: 1.05rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .header__brand-text {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   color: var(--color-ink);
   white-space: nowrap;
 }
@@ -61,17 +62,18 @@
 .header__nav ul {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
 }
 
 .header__nav-link {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--color-ink-soft);
-  padding: 0.4rem 0.05rem;
+  padding: 0.5rem 0.1rem;
   position: relative;
   white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .header__nav-link::after {
@@ -79,19 +81,20 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -2px;
+  bottom: -4px;
   height: 2px;
-  background: var(--color-accent);
+  background: var(--color-primary);
   transform: scaleX(0);
   transition: transform var(--duration-base) var(--ease-standard);
+  transform-origin: left;
 }
 
 .header__nav-link:hover {
-  color: var(--color-ink);
+  color: var(--color-primary);
 }
 
 .header__nav-link.is-active {
-  color: var(--color-green-dark);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
@@ -125,7 +128,7 @@
 }
 
 .header__lang-btn.is-active {
-  background: var(--color-green);
+  background: var(--color-primary);
   color: #fff;
 }
 

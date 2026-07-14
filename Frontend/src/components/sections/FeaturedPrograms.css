@@ -18,10 +18,11 @@
 
 .program-card__category {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent-dark);
+  color: var(--color-primary);
 }
 
 

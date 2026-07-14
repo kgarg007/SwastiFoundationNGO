@@ -10,6 +10,14 @@ import CtaBand from "../components/sections/CtaBand";
 import "../styles/page-hero.css";
 import "./ImpactPage.css";
 
+const iconMapping = ["BookOpen", "HeartPulse", "Home", "Leaf"];
+const descMapping = [
+  "Quality education and moral guidance.",
+  "Essential food for vulnerable families.",
+  "Expanding our reach across India.",
+  "Health and hygiene sanitation kits."
+];
+
 export default function ImpactPage() {
   const { t } = useLanguage();
   useReveal();
@@ -26,8 +34,13 @@ export default function ImpactPage() {
 
       <Section tone="deep">
         <div className="impact-page-stats">
-          {impactStats.map((stat) => (
-            <ImpactStat key={stat.id} value={stat.value} suffix={stat.suffix} label={stat.label} />
+          {impactStats.map((stat, i) => (
+            <ImpactStat 
+              key={stat.id} 
+              stat={stat} 
+              icon={iconMapping[i]} 
+              description={descMapping[i]} 
+            />
           ))}
         </div>
       </Section>

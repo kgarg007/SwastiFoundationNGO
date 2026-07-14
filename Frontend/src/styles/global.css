@@ -34,6 +34,34 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background-color var(--duration-base) var(--ease-standard),
     color var(--duration-base) var(--ease-standard);
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+body::before {
+  top: -10%;
+  left: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(15, 76, 129, 0.08) 0%, transparent 70%);
+}
+
+body::after {
+  bottom: -10%;
+  right: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(46, 125, 50, 0.06) 0%, transparent 70%);
 }
 
 #root {

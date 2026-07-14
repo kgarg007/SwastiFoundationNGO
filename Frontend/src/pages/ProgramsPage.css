@@ -22,8 +22,8 @@
 }
 
 .programs-filter__btn.is-active {
-  background: var(--color-green);
-  border-color: var(--color-green);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: #fff;
 }
 
@@ -57,9 +57,10 @@
 .program-detail-card__category {
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent-dark);
+  color: var(--color-primary);
 }
 
 

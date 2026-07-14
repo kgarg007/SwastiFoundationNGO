@@ -12,9 +12,10 @@
 .blog-story-card__program {
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent-dark);
+  color: var(--color-primary);
 }
 
 
