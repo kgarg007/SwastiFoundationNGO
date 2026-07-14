@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import { useReveal } from "../hooks/useReveal";
-import { volunteers } from "../data/orgData";
+import { useOrgData } from "../context/OrgDataContext";
 import Section from "../components/ui/Section";
 import SectionHeading from "../components/ui/SectionHeading";
 import Button from "../components/ui/Button";
@@ -10,6 +10,7 @@ import "./VolunteerPage.css";
 
 export default function VolunteerPage() {
   const { t } = useLanguage();
+  const { team } = useOrgData();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -124,10 +125,14 @@ export default function VolunteerPage() {
       <Section tone="alt">
         <SectionHeading title={t("volunteer.teamTitle")} />
         <div className="volunteer-team-grid">
-          {volunteers.map((v, i) => (
-            <div className="volunteer-team-card reveal" key={v.name} style={{ transitionDelay: `${i * 60}ms` }}>
+          {team.map((v, i) => (
+            <div className="volunteer-team-card reveal" key={v._id || v.name} style={{ transitionDelay: `${i * 60}ms` }}>
               <div className="volunteer-team-card__avatar" aria-hidden="true">
-                {v.name.charAt(0)}
+                {v.image ? (
+                  <img src={v.image} alt={v.name} />
+                ) : (
+                  v.name.charAt(0)
+                )}
               </div>
               <h3>{v.name}</h3>
               <p>{v.role}</p>

@@ -5,6 +5,7 @@ const main = require('../database');
 const Settings = require('../model/settings');
 const Program = require('../model/program');
 const Story = require('../model/story');
+const TeamMember = require('../model/teamMember');
 
 const defaultSettings = {
   orgInfo: {
@@ -120,6 +121,12 @@ const defaultStories = [
   }
 ];
 
+const defaultTeam = [
+  { name: "Ashwini", role: "Event Management" },
+  { name: "Krishna Garg", role: "Technical Coordinator" },
+  { name: "Aditya Kumar", role: "Technical Coordinator" }
+];
+
 async function seed() {
   await main();
   console.log("Connected to MongoDB for seeding...");
@@ -146,6 +153,15 @@ async function seed() {
     console.log("Default stories successfully seeded.");
   } else {
     console.log("Stories already exist in database.");
+  }
+
+  // Seed Team Members
+  const teamCount = await TeamMember.countDocuments();
+  if (teamCount === 0) {
+    await TeamMember.insertMany(defaultTeam);
+    console.log("Default team members successfully seeded.");
+  } else {
+    console.log("Team members already exist in database.");
   }
 
   mongoose.connection.close();

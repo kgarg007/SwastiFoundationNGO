@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [volunteersList, setVolunteersList] = useState([]);
   const [contactsList, setContactsList] = useState([]);
   const [careersList, setCareersList] = useState([]);
+  const [teamList, setTeamList] = useState([]);
   
   // Global settings state
   const [settings, setSettings] = useState({
@@ -80,6 +81,9 @@ export default function Dashboard() {
       } else if (activeTab === 'blogs') {
         const data = await api.get('/blog');
         setBlogs(data);
+      } else if (activeTab === 'team') {
+        const data = await api.get('/team');
+        setTeamList(data);
       } else if (activeTab === 'submissions') {
         const v = await api.get('/submissions/volunteers');
         const c = await api.get('/submissions/contact');
@@ -402,6 +406,48 @@ export default function Dashboard() {
     }
   }
 
+  // Volunteer Team CRUD Actions
+  async function handleTeamMemberSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMsg('');
+    setErrorMsg('');
+
+    const formData = new FormData(e.target);
+    const id = currentEditItem?._id;
+
+    try {
+      if (id) {
+        await api.put(`/team/${id}`, formData, true);
+        setSuccessMsg('Team member updated successfully!');
+      } else {
+        await api.post('/team', formData, true);
+        setSuccessMsg('Team member added successfully!');
+      }
+      setShowAddForm(false);
+      setCurrentEditItem(null);
+      fetchData();
+    } catch (err) {
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleDeleteTeamMember(id) {
+    if (!window.confirm('Delete this team member?')) return;
+    setLoading(true);
+    try {
+      await api.delete(`/team/${id}`);
+      setSuccessMsg('Team member deleted successfully!');
+      fetchData();
+    } catch (err) {
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Submission Inbox Deletion Actions
   async function handleDeleteSubmission(type, id) {
     if (!window.confirm(`Delete this submission entry?`)) return;
@@ -447,6 +493,9 @@ export default function Dashboard() {
           </button>
           <button className={activeTab === 'blogs' ? 'active' : ''} onClick={() => { setActiveTab('blogs'); setShowAddForm(false); setCurrentEditItem(null); }}>
             Blog & News
+          </button>
+          <button className={activeTab === 'team' ? 'active' : ''} onClick={() => { setActiveTab('team'); setShowAddForm(false); setCurrentEditItem(null); }}>
+            Volunteer Team
           </button>
           <button className={activeTab === 'submissions' ? 'active' : ''} onClick={() => { setActiveTab('submissions'); setShowAddForm(false); setCurrentEditItem(null); }}>
             Submissions Inbox
@@ -1000,6 +1049,92 @@ export default function Dashboard() {
                           <td>
                             <button className="btn-table-edit" onClick={() => { setCurrentEditItem(post); setShowAddForm(false); }}>Edit</button>
                             <button className="btn-table-delete" onClick={() => handleDeleteBlog(post._id)}>Delete</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* VOLUNTEER TEAM LIST */}
+          {activeTab === 'team' && (
+            <div>
+              <div className="tab-actions">
+                {!showAddForm && (
+                  <button className="btn-admin-action" onClick={() => { setShowAddForm(true); setCurrentEditItem(null); }}>
+                    Add team member
+                  </button>
+                )}
+              </div>
+
+              {showAddForm || currentEditItem ? (
+                <form onSubmit={handleTeamMemberSubmit} className="admin-settings-form">
+                  <h2>{currentEditItem ? 'Edit team member' : 'Add new team member'}</h2>
+                  <div className="form-grid">
+                    <label>
+                      <span>Member Name</span>
+                      <input type="text" name="name" required defaultValue={currentEditItem?.name || ''} />
+                    </label>
+                    <label>
+                      <span>Role / Designation</span>
+                      <input type="text" name="role" required defaultValue={currentEditItem?.role || ''} />
+                    </label>
+                    <label>
+                      <span>Profile Picture</span>
+                      <input type="file" name="image" accept="image/*" />
+                    </label>
+                  </div>
+                  <div className="btn-group">
+                    <button type="submit" className="btn-admin-action" disabled={loading}>
+                      {currentEditItem ? 'Update Member' : 'Save Member'}
+                    </button>
+                    <button type="button" className="btn-cancel" onClick={() => { setShowAddForm(false); setCurrentEditItem(null); }}>
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <div className="admin-list-table-container">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Role / Designation</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {teamList.map(member => (
+                        <tr key={member._id}>
+                          <td style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                            <div style={{
+                              width: '36px',
+                              height: '36px',
+                              borderRadius: '50%',
+                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '0.9rem',
+                              fontWeight: 'bold',
+                              overflow: 'hidden',
+                              flexShrink: 0
+                            }}>
+                              {member.image ? (
+                                <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                              ) : (
+                                member.name.charAt(0)
+                              )}
+                            </div>
+                            <strong>{member.name}</strong>
+                          </td>
+                          <td>{member.role}</td>
+                          <td>
+                            <button className="btn-table-edit" onClick={() => { setCurrentEditItem(member); setShowAddForm(false); }}>Edit</button>
+                            <button className="btn-table-delete" onClick={() => handleDeleteTeamMember(member._id)}>Delete</button>
                           </td>
                         </tr>
                       ))}
