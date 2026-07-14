@@ -11,12 +11,51 @@ import "./VolunteerPage.css";
 export default function VolunteerPage() {
   const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   useReveal();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // TODO: Connect Backend API — submit volunteer sign-up form
-    setSubmitted(true);
+    setLoading(true);
+    setErrorMsg("");
+    setSubmitted(false);
+
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      role: formData.get("role"),
+      message: formData.get("message"),
+    };
+
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/regis`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+      e.target.reset();
+    } 
+    catch (err) {
+      setErrorMsg(err.message);
+    } 
+    finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -54,25 +93,25 @@ export default function VolunteerPage() {
               <input type="email" name="email" required autoComplete="email" />
             </label>
             <label className="form-field">
-              <span>{t("common.phone")}</span>
-              <input type="tel" name="phone" autoComplete="tel" />
+              <span>{t("common.phone")} <em>*{t("common.required")}</em></span>
+              <input type="tel" name="phone" required autoComplete="tel" />
             </label>
             <label className="form-field">
-              <span>Role you're applying for</span>
-              <input type="text" name="role" />
+              <span>Role you're applying for <em>*{t("common.required")}</em></span>
+              <input type="text" name="role" required />
             </label>
             <label className="form-field">
               <span>{t("common.message")}</span>
               <textarea name="message" rows="4" />
             </label>
-            <div className="volunteer-form__upload">
-              {/* TODO: Implement resume/CV file upload to backend storage */}
-              <span className="volunteer-form__upload-label">Resume / CV</span>
-              <div className="volunteer-form__upload-box">Upload coming soon</div>
-            </div>
-            <Button type="submit" variant="primary" size="md">
-              {t("common.submit")}
+            <Button type="submit" variant="primary" size="md" disabled={loading}>
+              {loading ? "Submitting..." : t("common.submit")}
             </Button>
+            {errorMsg && (
+              <p className="volunteer-form__error" role="alert">
+                {errorMsg}
+              </p>
+            )}
             {submitted && (
               <p className="volunteer-form__success" role="status">
                 Thank you! We'll be in touch soon.

@@ -23,10 +23,6 @@ const userSchema = new Schema({
     },
     message:{
         type:String
-    },
-    cv:{
-      type: String, // store CV URL/path here
-      required: true,
     }
 
 },{timestamps:true})
