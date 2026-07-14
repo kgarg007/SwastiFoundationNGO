@@ -1,6 +1,7 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import { useReveal } from "../hooks/useReveal";
-import { orgInfo, aboutContent, leadershipTeam, founderMessage } from "../data/orgData";
+import { useOrgData } from "../context/OrgDataContext";
+import { leadershipTeam } from "../data/orgData";
 import Section from "../components/ui/Section";
 import SectionHeading from "../components/ui/SectionHeading";
 import CtaBand from "../components/sections/CtaBand";
@@ -13,6 +14,7 @@ function formatDate(dateStr) {
 
 export default function AboutPage() {
   const { t } = useLanguage();
+  const { orgInfo, aboutContent, founderMessage } = useOrgData();
   useReveal();
 
   return (
@@ -64,7 +66,7 @@ export default function AboutPage() {
       <Section tone="base">
         <SectionHeading title={t("about.valuesTitle")} />
         <div className="values-grid">
-          {aboutContent.coreValues.map((value, i) => (
+          {(aboutContent.coreValues || []).map((value, i) => (
             <div className="values-grid__item reveal" key={value.id} style={{ transitionDelay: `${i * 50}ms` }}>
               <span className="values-grid__index">{String(i + 1).padStart(2, "0")}</span>
               <h3>{value.name}</h3>

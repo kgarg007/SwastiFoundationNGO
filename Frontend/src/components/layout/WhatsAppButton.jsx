@@ -1,9 +1,10 @@
-import { orgInfo } from "../../data/orgData";
+import { useOrgData } from "../../context/OrgDataContext";
 import { useLanguage } from "../../i18n/LanguageContext";
 import "./WhatsAppButton.css";
 
 export default function WhatsAppButton() {
   const { t } = useLanguage();
+  const { orgInfo } = useOrgData();
 
   // TODO: Replace with NGO WhatsApp Number (currently using a dummy/sample number)
   const whatsappUrl = `https://wa.me/${orgInfo.whatsappNumber}`;

@@ -12,7 +12,15 @@ app.use(express.json());
 
 
 // Routing
-app.use('/regis',register);
+app.use('/regis', register);
+app.use('/auth', require('./routes/auth'));
+app.use('/programs', require('./routes/programs'));
+app.use('/stories', require('./routes/stories'));
+app.use('/gallery', require('./routes/gallery'));
+app.use('/events', require('./routes/events'));
+app.use('/blog', require('./routes/blog'));
+app.use('/settings', require('./routes/settings'));
+app.use('/submissions', require('./routes/submissions'));
 
 
 

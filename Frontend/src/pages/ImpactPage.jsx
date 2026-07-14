@@ -1,6 +1,7 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import { useReveal } from "../hooks/useReveal";
-import { impactStats, successStories } from "../data/orgData";
+import { useOrgData } from "../context/OrgDataContext";
+import { impactStats } from "../data/orgData";
 import Section from "../components/ui/Section";
 import SectionHeading from "../components/ui/SectionHeading";
 import Card from "../components/ui/Card";
@@ -20,6 +21,7 @@ const descMapping = [
 
 export default function ImpactPage() {
   const { t } = useLanguage();
+  const { stories } = useOrgData();
   useReveal();
 
   return (
@@ -50,10 +52,14 @@ export default function ImpactPage() {
       <Section tone="alt" id="stories">
         <SectionHeading title={t("impact.storiesTitle")} />
         <div className="full-stories">
-          {successStories.map((story, i) => (
-            <Card className="full-story-card reveal" key={story.id} style={{ transitionDelay: `${i * 60}ms` }}>
+          {stories.map((story, i) => (
+            <Card className="full-story-card reveal" key={story._id || story.id} style={{ transitionDelay: `${i * 60}ms` }}>
               <div className="full-story-card__media">
-                <ImagePlaceholder label={story.name} ratio="4 / 5" />
+                {story.image ? (
+                  <img src={story.image} alt={story.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                ) : (
+                  <ImagePlaceholder label={story.name} ratio="4 / 5" />
+                )}
               </div>
               <div className="full-story-card__body">
                 <span className="full-story-card__program">{story.program}</span>

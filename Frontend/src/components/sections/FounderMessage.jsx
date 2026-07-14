@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../i18n/LanguageContext";
-import { founderMessage } from "../../data/orgData";
+import { useOrgData } from "../../context/OrgDataContext";
 import Section from "../ui/Section";
 import "./FounderMessage.css";
 
 export default function FounderMessage() {
   const { t } = useLanguage();
+  const { founderMessage } = useOrgData();
+
+  const quote = founderMessage.letter && founderMessage.letter.length > 1 ? founderMessage.letter[1] : "";
+  const bodyText = founderMessage.letter && founderMessage.letter.length > 2 ? founderMessage.letter[2] : "";
 
   return (
     <Section tone="alt">
@@ -18,8 +22,8 @@ export default function FounderMessage() {
         </div>
         <div className="founder-message__content">
           <span className="founder-message__eyebrow">{t("home.founderTitle")}</span>
-          <p className="founder-message__quote">{founderMessage.letter[1]}</p>
-          <p className="founder-message__body">{founderMessage.letter[2]}</p>
+          {quote && <p className="founder-message__quote">{quote}</p>}
+          {bodyText && <p className="founder-message__body">{bodyText}</p>}
           <div className="founder-message__sign">
             <p className="founder-message__closing">{founderMessage.closing}</p>
             <p className="founder-message__name">{founderMessage.founderName}</p>

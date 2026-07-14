@@ -12,13 +12,17 @@ const VolunteerPage = lazy(() => import("./pages/VolunteerPage"));
 const DonatePage = lazy(() => import("./pages/DonatePage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 
-// Temporary for testing
+const AdminLogin = lazy(() => import("./pages/Admin/Login"));
+const AdminDashboard = lazy(() => import("./pages/Admin/Dashboard"));
+const ProtectedRoute = lazy(() => import("./components/layout/ProtectedRoute"));
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+
 export default function App() {
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
+        {/* Public Pages with Header/Footer */}
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
@@ -28,8 +32,13 @@ export default function App() {
           <Route path="volunteer" element={<VolunteerPage />} />
           <Route path="donate" element={<DonatePage />} />
           <Route path="stories" element={<BlogPage />} />
-
           <Route path="*" element={<NotFoundPage />} />
+        </Route>
+
+        {/* Admin Pages (Separate Layout without visitor Header/Footer) */}
+        <Route path="admin/login" element={<AdminLogin />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
         </Route>
       </Routes>
     </Suspense>

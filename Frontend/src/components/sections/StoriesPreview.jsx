@@ -1,5 +1,5 @@
 import { useLanguage } from "../../i18n/LanguageContext";
-import { successStories } from "../../data/orgData";
+import { useOrgData } from "../../context/OrgDataContext";
 import Section from "../ui/Section";
 import SectionHeading from "../ui/SectionHeading";
 import Card from "../ui/Card";
@@ -9,6 +9,7 @@ import "./StoriesPreview.css";
 
 export default function StoriesPreview() {
   const { t } = useLanguage();
+  const { stories } = useOrgData();
 
   return (
     <Section tone="base">
@@ -18,10 +19,14 @@ export default function StoriesPreview() {
         subtitle={t("home.storiesSub")}
       />
       <div className="stories-grid">
-        {successStories.map((story, i) => (
-          <Card className="story-card reveal" key={story.id} style={{ transitionDelay: `${i * 60}ms` }}>
+        {stories.map((story, i) => (
+          <Card className="story-card reveal" key={story._id || story.id} style={{ transitionDelay: `${i * 60}ms` }}>
             <div className="story-card__media">
-              <ImagePlaceholder label={story.name} ratio="1 / 1" />
+              {story.image ? (
+                <img src={story.image} alt={story.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              ) : (
+                <ImagePlaceholder label={story.name} ratio="1 / 1" />
+              )}
             </div>
             <div className="story-card__body">
               <span className="story-card__program">{story.program}</span>

@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../i18n/LanguageContext";
-import { orgInfo } from "../../data/orgData";
+import { useOrgData } from "../../context/OrgDataContext";
 import { Facebook, Instagram, Youtube, HeartPulse, Leaf } from "../ui/icons";
 import "./Footer.css";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { orgInfo } = useOrgData();
   const year = new Date().getFullYear();
+
+  const facebookUrl = orgInfo.social?.facebook && orgInfo.social.facebook !== '#' ? orgInfo.social.facebook : "https://www.facebook.com/Swastifoundationngo?mibextid=rS40aB7S9Ucbxw6v";
+  const instagramUrl = orgInfo.social?.instagram && orgInfo.social.instagram !== '#' ? orgInfo.social.instagram : "https://www.instagram.com/swastifoundationngo?igsh=cHc2aXZ6N2M2ZGw1";
+  const youtubeUrl = orgInfo.social?.youtube && orgInfo.social.youtube !== '#' ? orgInfo.social.youtube : "https://www.youtube.com/@swastifoundationngo4639";
 
   return (
     <footer className="footer">
@@ -71,13 +76,13 @@ export default function Footer() {
             </address>
             <h3 className="footer__heading footer__heading--social">{t("footer.followUs")}</h3>
             <div className="footer__social">
-              <a href="https://www.facebook.com/Swastifoundationngo?mibextid=rS40aB7S9Ucbxw6v" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="footer__social-link">
+              <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="footer__social-link">
                 <Facebook className="footer__social-icon" />
               </a>
-              <a href="https://www.instagram.com/swastifoundationngo?igsh=cHc2aXZ6N2M2ZGw1" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer__social-link">
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer__social-link">
                 <Instagram className="footer__social-icon" />
               </a>
-              <a href="https://www.youtube.com/@swastifoundationngo4639" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="footer__social-link">
+              <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="footer__social-link">
                 <Youtube className="footer__social-icon" />
               </a>
             </div>

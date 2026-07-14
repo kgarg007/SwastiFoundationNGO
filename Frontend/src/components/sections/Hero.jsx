@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
-import { orgInfo, impactStats } from "../../data/orgData";
+import { useOrgData } from "../../context/OrgDataContext";
+import { impactStats } from "../../data/orgData";
 import Button from "../ui/Button";
 import "./Hero.css";
 
@@ -15,6 +16,7 @@ const fadeUpVariants = {
 
 export default function Hero() {
   const { t } = useLanguage();
+  const { orgInfo } = useOrgData();
 
   return (
     <section className="hero">

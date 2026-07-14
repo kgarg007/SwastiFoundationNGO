@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import { useReveal } from "../hooks/useReveal";
-import { programs } from "../data/orgData";
+import { useOrgData } from "../context/OrgDataContext";
 import Section from "../components/ui/Section";
 import Card from "../components/ui/Card";
 import ImagePlaceholder from "../components/ui/ImagePlaceholder";
@@ -11,13 +11,14 @@ import "./ProgramsPage.css";
 
 export default function ProgramsPage() {
   const { t } = useLanguage();
+  const { programs } = useOrgData();
   const [activeCategory, setActiveCategory] = useState("all");
   useReveal([activeCategory]);
 
   const categories = useMemo(() => {
     const unique = Array.from(new Set(programs.map((p) => p.category)));
     return ["all", ...unique];
-  }, []);
+  }, [programs]);
 
   const filtered = activeCategory === "all" ? programs : programs.filter((p) => p.category === activeCategory);
 
@@ -49,18 +50,22 @@ export default function ProgramsPage() {
           {filtered.map((program, i) => (
             <Card
               as="article"
-              id={program.id}
+              id={program._id || program.id}
               className="program-detail-card reveal"
-              key={program.id}
+              key={program._id || program.id}
               style={{ transitionDelay: `${i * 50}ms` }}
             >
               <div className="program-detail-card__media">
-                <ImagePlaceholder label={program.name} ratio="4 / 3" />
+                {program.image ? (
+                  <img src={program.image} alt={program.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                ) : (
+                  <ImagePlaceholder label={program.name} ratio="4 / 3" />
+                )}
               </div>
               <div className="program-detail-card__body">
                 <span className="program-detail-card__category">{program.category}</span>
                 <h2 className="program-detail-card__title">{program.name}</h2>
-                {program.locations.length > 0 && (
+                {program.locations && program.locations.length > 0 && (
                   <p className="program-detail-card__locations">
                     <strong>{t("programs.locationsLabel")}:</strong> {program.locations.join(", ")}
                   </p>
