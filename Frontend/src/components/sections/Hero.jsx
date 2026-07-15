@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { useOrgData } from "../../context/OrgDataContext";
-import { impactStats } from "../../data/orgData";
+import { impactStats as fallbackStats } from "../../data/orgData";
 import Button from "../ui/Button";
 import "./Hero.css";
 
@@ -16,7 +16,8 @@ const fadeUpVariants = {
 
 export default function Hero() {
   const { t } = useLanguage();
-  const { orgInfo } = useOrgData();
+  const { orgInfo, impactStats } = useOrgData();
+  const statsToRender = impactStats && impactStats.length > 0 ? impactStats : fallbackStats;
 
   return (
     <section className="hero">
@@ -95,7 +96,7 @@ export default function Hero() {
       >
         <div className="container">
           <div className="hero__stats">
-            {impactStats.slice(0, 3).map((stat) => (
+            {statsToRender.slice(0, 3).map((stat) => (
               <div className="hero__stat-card" key={stat.id}>
                 <div className="hero__stat-value">
                   {stat.value.toLocaleString("en-IN")}{stat.suffix}

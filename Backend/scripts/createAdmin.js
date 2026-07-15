@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 const Admin = require('../model/admin');
 const main = require('../database');
 
-const username = process.argv[2] || 'admin';
-const password = process.argv[3] || 'SwastiAdmin123';
+const username = process.argv[2] || process.env.ADMIN_USERNAME;
+const password = process.argv[3] || process.env.ADMIN_PASS;
 
 console.log(`Starting admin creation task...`);
 console.log(`Target username: ${username}`);

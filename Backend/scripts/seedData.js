@@ -56,7 +56,13 @@ const defaultSettings = {
       "I extend my heartfelt gratitude to our volunteers, supporters, partners, and well-wishers whose trust and dedication make this journey possible. Together, let us continue working towards creating a future defined by hope, equality, and sustainable social impact."
     ],
     closing: "With sincere regards,"
-  }
+  },
+  impactStats: [
+    { id: "children-educated", value: 5000, suffix: "+", label: "Children Educated" },
+    { id: "ration-distributed", value: 20000, suffix: "+", label: "Ration Distributed" },
+    { id: "states-reached", value: 10, suffix: "+", label: "States Reached" },
+    { id: "cleanliness-kits", value: 10000, suffix: "+", label: "Cleanliness Kits Distributed" }
+  ]
 };
 
 const defaultPrograms = [

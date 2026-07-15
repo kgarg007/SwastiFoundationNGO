@@ -25,7 +25,8 @@ export default function Dashboard() {
   const [settings, setSettings] = useState({
     orgInfo: {},
     aboutContent: { coreValues: [] },
-    founderMessage: { letter: [] }
+    founderMessage: { letter: [] },
+    impactStats: []
   });
 
   // Edit Modals / Form states
@@ -45,8 +46,6 @@ export default function Dashboard() {
     try {
       if (activeTab === 'overview') {
         const v = await api.get('/submissions/volunteers');
-        const c = await api.get('/submissions/contact');
-        const cr = await api.get('/submissions/careers');
         const p = await api.get('/programs');
         const s = await api.get('/stories');
         const g = await api.get('/gallery');
@@ -55,8 +54,6 @@ export default function Dashboard() {
         
         setStats({
           volunteers: v.length,
-          contacts: c.length,
-          careers: cr.length,
           programs: p.length,
           stories: s.length,
           gallery: g.length,
@@ -86,11 +83,7 @@ export default function Dashboard() {
         setTeamList(data);
       } else if (activeTab === 'submissions') {
         const v = await api.get('/submissions/volunteers');
-        const c = await api.get('/submissions/contact');
-        const cr = await api.get('/submissions/careers');
         setVolunteersList(v);
-        setContactsList(c);
-        setCareersList(cr);
       }
     } catch (err) {
       setErrorMsg(err.message || 'Error loading dashboard data.');
@@ -358,6 +351,18 @@ export default function Dashboard() {
 
     const formData = new FormData(e.target);
     
+    const impactStatsData = [
+      { id: "children-educated" },
+      { id: "ration-distributed" },
+      { id: "states-reached" },
+      { id: "cleanliness-kits" }
+    ].map(item => ({
+      id: item.id,
+      label: formData.get(`impact_${item.id}_label`),
+      value: parseInt(formData.get(`impact_${item.id}_value`)) || 0,
+      suffix: formData.get(`impact_${item.id}_suffix`) || ''
+    }));
+
     // Parse values from form
     const body = {
       orgInfo: {
@@ -392,7 +397,8 @@ export default function Dashboard() {
         founderTitle: formData.get('founder_title'),
         letter: formData.get('founder_letter').split('\n\n').filter(p => p.trim() !== ''),
         closing: formData.get('founder_closing')
-      }
+      },
+      impactStats: impactStatsData
     };
 
     try {
@@ -522,14 +528,6 @@ export default function Dashboard() {
               <div className="admin-stats-card">
                 <h3>Volunteer signups</h3>
                 <div className="value">{stats.volunteers}</div>
-              </div>
-              <div className="admin-stats-card">
-                <h3>Contact queries</h3>
-                <div className="value">{stats.contacts}</div>
-              </div>
-              <div className="admin-stats-card">
-                <h3>Job & Internship applications</h3>
-                <div className="value">{stats.careers}</div>
               </div>
               <div className="admin-stats-card">
                 <h3>Active programs</h3>
@@ -678,6 +676,36 @@ export default function Dashboard() {
                     <span>Founder Letter paragraphs (separate paragraphs with blank double enters)</span>
                     <textarea name="founder_letter" rows="8" defaultValue={settings.founderMessage.letter?.join('\n\n') || ''} />
                   </label>
+                </div>
+              </section>
+
+              <section className="settings-section">
+                <h2>Impact statistics</h2>
+                <div className="form-grid">
+                  {(settings.impactStats && settings.impactStats.length > 0
+                    ? settings.impactStats
+                    : [
+                        { id: "children-educated", value: 5000, suffix: "+", label: "Children Educated" },
+                        { id: "ration-distributed", value: 20000, suffix: "+", label: "Ration Distributed" },
+                        { id: "states-reached", value: 10, suffix: "+", label: "States Reached" },
+                        { id: "cleanliness-kits", value: 10000, suffix: "+", label: "Cleanliness Kits Distributed" }
+                      ]
+                  ).map((stat) => (
+                    <div key={stat.id} style={{ display: 'contents' }}>
+                      <label>
+                        <span>{stat.id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} Label</span>
+                        <input type="text" name={`impact_${stat.id}_label`} defaultValue={stat.label || ''} required />
+                      </label>
+                      <label>
+                        <span>Value</span>
+                        <input type="number" name={`impact_${stat.id}_value`} defaultValue={stat.value ?? ''} required />
+                      </label>
+                      <label>
+                        <span>Suffix</span>
+                        <input type="text" name={`impact_${stat.id}_suffix`} defaultValue={stat.suffix || ''} />
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </section>
 
@@ -1147,10 +1175,10 @@ export default function Dashboard() {
 
           {/* SUBMISSIONS INBOX VIEW */}
           {activeTab === 'submissions' && (
-            <div className="admin-submissions-inbox-grid">
+            <div className="admin-submissions-inbox-grid" style={{ gridTemplateColumns: '1fr' }}>
               
               {/* Volunteers inbox list */}
-              <section className="settings-section inbox-section">
+              <section className="settings-section inbox-section" style={{ maxWidth: '100%' }}>
                 <h2>Volunteer registrations</h2>
                 <div className="admin-list-table-container scrollable-table">
                   <table className="admin-table">
@@ -1174,78 +1202,6 @@ export default function Dashboard() {
                           <td>{v.message}</td>
                           <td>
                             <button className="btn-table-delete" onClick={() => handleDeleteSubmission('volunteers', v._id)}>Delete</button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              {/* Contact inbox list */}
-              <section className="settings-section inbox-section">
-                <h2>Contact queries</h2>
-                <div className="admin-list-table-container scrollable-table">
-                  <table className="admin-table">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Subject</th>
-                        <th>Message</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {contactsList.map(c => (
-                        <tr key={c._id}>
-                          <td><strong>{c.name}</strong></td>
-                          <td><a href={`mailto:${c.email}`}>{c.email}</a></td>
-                          <td><a href={`tel:${c.phone}`}>{c.phone}</a></td>
-                          <td>{c.subject}</td>
-                          <td>{c.message}</td>
-                          <td>
-                            <button className="btn-table-delete" onClick={() => handleDeleteSubmission('contact', c._id)}>Delete</button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              {/* Careers inbox list */}
-              <section className="settings-section inbox-section">
-                <h2>Careers & Internships applications</h2>
-                <div className="admin-list-table-container scrollable-table">
-                  <table className="admin-table">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Position</th>
-                        <th>Resume file</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {careersList.map(c => (
-                        <tr key={c._id}>
-                          <td><strong>{c.name}</strong></td>
-                          <td><a href={`mailto:${c.email}`}>{c.email}</a></td>
-                          <td><a href={`tel:${c.phone}`}>{c.phone}</a></td>
-                          <td>{c.position}</td>
-                          <td>
-                            {c.resumeUrl ? (
-                              <a href={c.resumeUrl} target="_blank" rel="noopener noreferrer" className="btn-table-edit">Download Resume</a>
-                            ) : (
-                              'No Resume uploaded'
-                            )}
-                          </td>
-                          <td>
-                            <button className="btn-table-delete" onClick={() => handleDeleteSubmission('careers', c._id)}>Delete</button>
                           </td>
                         </tr>
                       ))}

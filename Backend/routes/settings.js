@@ -26,7 +26,7 @@ router.put('/', auth, async (req, res) => {
       settings = new Settings();
     }
 
-    const { orgInfo, aboutContent, founderMessage } = req.body;
+    const { orgInfo, aboutContent, founderMessage, impactStats } = req.body;
 
     if (orgInfo) {
       settings.orgInfo = { ...settings.orgInfo, ...orgInfo };
@@ -36,6 +36,9 @@ router.put('/', auth, async (req, res) => {
     }
     if (founderMessage) {
       settings.founderMessage = { ...settings.founderMessage, ...founderMessage };
+    }
+    if (impactStats) {
+      settings.impactStats = impactStats;
     }
 
     await settings.save();

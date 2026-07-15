@@ -5,9 +5,10 @@ import "./WhatsAppButton.css";
 export default function WhatsAppButton() {
   const { t } = useLanguage();
   const { orgInfo } = useOrgData();
+  // Prioritize the frontend environment variable first, then fallback to database settings
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || orgInfo.whatsappNumber || "";
 
-  // TODO: Replace with NGO WhatsApp Number (currently using a dummy/sample number)
-  const whatsappUrl = `https://wa.me/${orgInfo.whatsappNumber}`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
   return (
     <a

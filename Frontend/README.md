@@ -70,7 +70,7 @@ This project is Cloudflare Pages-ready out of the box:
 - No Node.js server dependency — `npm run build` produces a fully static
   `dist/` folder
 - Route-based code splitting via `React.lazy` keeps the initial bundle small
-- `.env.example` documents the environment variables a future backend
+- `.env` documents the environment variables a future backend
   integration (API base URL, Razorpay key, etc.) will need
 
 To deploy: connect this repo to Cloudflare Pages, set the build command to

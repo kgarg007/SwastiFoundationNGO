@@ -47,6 +47,7 @@ export function OrgDataProvider({ children }) {
           orgInfo: settings.orgInfo,
           aboutContent: settings.aboutContent,
           founderMessage: settings.founderMessage,
+          impactStats: settings.impactStats || [],
           programs,
           stories,
           gallery,

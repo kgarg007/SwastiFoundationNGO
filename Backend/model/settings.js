@@ -41,6 +41,20 @@ const settingsSchema = new Schema({
     founderTitle: { type: String, default: "Founder, Swasti Foundation" },
     letter: { type: [String], default: [] },
     closing: { type: String, default: "With sincere regards," }
+  },
+  impactStats: {
+    type: [{
+      id: { type: String, required: true },
+      value: { type: Number, required: true },
+      suffix: { type: String, default: "+" },
+      label: { type: String, required: true }
+    }],
+    default: [
+      { id: "children-educated", value: 5000, suffix: "+", label: "Children Educated" },
+      { id: "ration-distributed", value: 20000, suffix: "+", label: "Ration Distributed" },
+      { id: "states-reached", value: 10, suffix: "+", label: "States Reached" },
+      { id: "cleanliness-kits", value: 10000, suffix: "+", label: "Cleanliness Kits Distributed" }
+    ]
   }
 }, { timestamps: true });
 

@@ -145,7 +145,7 @@ Founder portrait is a placeholder pending a real photo.
 |---|---|
 | English default, working Hindi switch | ✅ Full UI chrome (nav, buttons, labels, forms) is bilingual via `src/i18n/`. Organisation content (mission, programs, stories, etc.) is currently English-only in the data layer — translating that content into Hindi was not requested in the source document and would require either professional translation or an explicit decision from you, so it's left as English with a structural TODO rather than machine-translated. |
 | Light mode default, dark mode toggle | ✅ verified visually in this session — strong contrast in both modes, toggle persists via localStorage |
-| Cloudflare Pages deployment readiness | ✅ `public/_redirects` for SPA routing, `.env.example` for config, no Node-server dependency, route-based code-splitting via `React.lazy`, Vite build verified clean |
+| Cloudflare Pages deployment readiness | ✅ `public/_redirects` for SPA routing, `.env` for config, no Node-server dependency, route-based code-splitting via `React.lazy`, Vite build verified clean |
 | Backend integration points | ✅ Every form (volunteer, donate, contact, careers/apply) has a dummy submit handler and an explicit `TODO: Connect Backend API` comment. `src/data/orgData.js` is structured as a drop-in replacement target for a future CMS/API call. |
 | No payment gateway implemented | ✅ Confirmed — Razorpay is untouched, only a UI-level dummy success/failure simulation exists |
 | WhatsApp button with dummy number + TODO | ✅ Present as a floating action button site-wide; number taken verbatim from source (`459073474`) with a TODO flagging that this is shorter than a standard 10-digit Indian mobile number and should be verified with the organisation before going live |

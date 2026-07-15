@@ -1,7 +1,7 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import { useReveal } from "../hooks/useReveal";
 import { useOrgData } from "../context/OrgDataContext";
-import { impactStats } from "../data/orgData";
+import { impactStats as fallbackStats } from "../data/orgData";
 import Section from "../components/ui/Section";
 import SectionHeading from "../components/ui/SectionHeading";
 import Card from "../components/ui/Card";
@@ -21,7 +21,8 @@ const descMapping = [
 
 export default function ImpactPage() {
   const { t } = useLanguage();
-  const { stories } = useOrgData();
+  const { stories, impactStats } = useOrgData();
+  const statsToRender = impactStats && impactStats.length > 0 ? impactStats : fallbackStats;
   useReveal();
 
   return (
@@ -36,7 +37,7 @@ export default function ImpactPage() {
 
       <Section tone="deep">
         <div className="impact-page-stats">
-          {impactStats.map((stat, i) => (
+          {statsToRender.map((stat, i) => (
             <ImpactStat 
               key={stat.id} 
               stat={stat} 

@@ -1,5 +1,6 @@
 import { useLanguage } from "../../i18n/LanguageContext";
-import { impactStats } from "../../data/orgData";
+import { impactStats as fallbackStats } from "../../data/orgData";
+import { useOrgData } from "../../context/OrgDataContext";
 import { motion } from "framer-motion";
 import Section from "../ui/Section";
 import ImpactStat from "./ImpactStat";
@@ -23,6 +24,8 @@ const descMapping = [
 
 export default function ImpactNumbers() {
   const { t } = useLanguage();
+  const { impactStats } = useOrgData();
+  const statsToRender = impactStats && impactStats.length > 0 ? impactStats : fallbackStats;
 
   return (
     <Section tone="deep" className="impact-section">
@@ -41,7 +44,7 @@ export default function ImpactNumbers() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          {impactStats.map((stat, i) => (
+          {statsToRender.map((stat, i) => (
             <ImpactStat 
               key={stat.id}
               stat={stat} 
