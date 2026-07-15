@@ -475,7 +475,7 @@ export default function Dashboard() {
       {/* Sidebar navigation */}
       <aside className="admin-sidebar">
         <div className="admin-sidebar-header">
-          <span className="admin-logo">स्व</span>
+          <img src="/images/logo.png" className="admin-logo" alt="Swasti Foundation Logo" />
           <h2>Swasti NGO</h2>
         </div>
         <nav className="admin-sidebar-nav">

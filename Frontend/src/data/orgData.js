@@ -119,8 +119,7 @@ export const programs = [
     locations: ["Jharkhand", "Delhi", "Aligarh", "Muradabad", "Gurgaon", "Rajasthan"],
     description:
       "Bal Sanskar Pathshala is an initiative of Swasti Foundation dedicated to nurturing children through value-based education, moral development, and holistic learning. Beyond academics, the program focuses on instilling discipline, compassion, respect, cultural values, and a sense of social responsibility. By creating a supportive and inspiring learning environment, Bal Sanskar Pathshala aims to empower young minds with the knowledge, confidence, and character needed to become responsible citizens and future leaders.",
-    // TODO: Replace with actual NGO image
-    image: "/images/programs/bal-sanskar-pathshala.jpg",
+    image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "vriksharopan",
@@ -129,7 +128,7 @@ export const programs = [
     locations: [],
     description:
       "Vriksharopan is an environmental initiative by Swasti Foundation focused on promoting ecological sustainability through tree plantation drives. By encouraging community participation and environmental awareness, the initiative aims to create greener surroundings, improve air quality, and contribute towards a healthier and more sustainable future.",
-    image: "/images/programs/vriksharopan.jpg",
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "yog-diwas",
@@ -138,7 +137,7 @@ export const programs = [
     locations: [],
     description:
       "Swasti Foundation celebrates International Yoga Day to promote physical well-being, mental wellness, and a healthy lifestyle. Through yoga sessions and awareness programs, the initiative encourages individuals of all ages to embrace holistic health, mindfulness, and the importance of preventive healthcare.",
-    image: "/images/programs/yog-diwas.jpg",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "ambedkar-baba-sahab-program",
@@ -147,7 +146,7 @@ export const programs = [
     locations: [],
     description:
       "Swasti Foundation organizes Dr. B. R. Ambedkar Jayanti programs to honor the life, vision, and contributions of Dr. B. R. Ambedkar towards equality, social justice, and constitutional values. The initiative promotes awareness about education, empowerment, and the importance of building an inclusive and equitable society.",
-    image: "/images/programs/ambedkar-program.jpg",
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "sashakt-silai-kendra",
@@ -156,7 +155,7 @@ export const programs = [
     locations: ["Karol Bagh"],
     description:
       "Sashakt Silai Kendra is a flagship women empowerment program of Swasti Foundation that provides professional tailoring and stitching training to women from economically disadvantaged communities. By equipping participants with practical vocational skills, the initiative promotes self-reliance, entrepreneurship, and sustainable livelihood opportunities, enabling women to build a brighter future for themselves and their families.",
-    image: "/images/programs/sashakt-silai-kendra.jpg",
+    image: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "life-matters-campaign",
@@ -165,7 +164,7 @@ export const programs = [
     locations: [],
     description:
       "Life Matters Campaign is a mental health awareness initiative by Swasti Foundation dedicated to promoting emotional well-being, reducing stigma around mental health, and encouraging individuals to seek timely support. Through awareness sessions, community outreach, and educational programs, the campaign fosters hope, resilience, and the importance of reaching out during challenging times.",
-    image: "/images/programs/life-matters-campaign.jpg",
+    image: "https://res.cloudinary.com/ykdovzl1/image/upload/v1784055779/gm93lhbh0h30lsq32cgk.png",
   },
 ];
 
@@ -185,8 +184,7 @@ export const successStories = [
       "A young cricketer from an underprivileged background who, with Swasti Foundation's support, went on to earn Player of the Match honours after an unbeaten 153 off 66 balls.",
     story:
       "At Swasti Foundation, we believe that talent should never be limited by financial or social circumstances. One such inspiring example is Ritik Aggarwal, a young and determined cricketer whose journey reflects the power of opportunity, guidance, and perseverance. Coming from an underprivileged background, Ritik received encouragement and support from Swasti Foundation to pursue his passion for cricket. With consistent training, dedication, and hard work, he steadily developed his skills and began making a mark in competitive cricket. Over the years, Ritik has earned recognition through outstanding performances and has won several medals and accolades in various cricket tournaments. One of his most remarkable achievements came when he was named Player of the Match after scoring an unbeaten 153 runs off just 66 balls and taking 2 wickets, leading his team to a convincing 9-wicket victory. Ritik's journey is a reflection of Swasti Foundation's commitment to identifying potential, nurturing dreams, and empowering young individuals to achieve excellence.",
-    // TODO: Replace with actual NGO image
-    image: "/images/stories/ritik-aggarwal.jpg",
+    image: "https://images.unsplash.com/photo-1531415080290-bc9b8996bc64?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "anuj-arya",
@@ -196,7 +194,7 @@ export const successStories = [
       "A Bal Sanskar Pathshala beneficiary whose value-based education and mentorship helped him secure a respectable professional position.",
     story:
       "Anuj Arya is a proud beneficiary of Swasti Foundation's Bal Sanskar Pathshala, where he received educational support, guidance, and value-based learning during his formative years. With dedication, perseverance, and the strong foundation built through the Pathshala, Anuj successfully pursued his education and has now secured a respectable professional position. His journey reflects how access to quality education, mentorship, and the right opportunities can transform lives. Today, Anuj's success stands as an inspiration for many young learners, reinforcing Swasti Foundation's commitment to empowering children through education and helping them build a brighter and self-reliant future.",
-    image: "/images/stories/anuj-arya.jpg",
+    image: "https://images.unsplash.com/photo-1517256064527-09c53b2d0bc6?auto=format&fit=crop&w=800&q=80",
   },
 ];
 

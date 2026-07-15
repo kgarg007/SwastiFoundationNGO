@@ -34,7 +34,7 @@ export default function Footer() {
         <div className="footer__grid">
           <div className="footer__col footer__col--brand">
             <div className="footer__brand">
-              <span className="footer__brand-mark" aria-hidden="true">स्व</span>
+              <img src="/images/logo.png" className="footer__brand-mark" alt="Swasti Foundation Logo" />
               <span className="footer__brand-text">{orgInfo.name}</span>
             </div>
             <p className="footer__tagline">{orgInfo.tagline}</p>

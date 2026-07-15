@@ -28,11 +28,17 @@ export default function BlogPage() {
         <div className="blog-stories-grid">
           {stories.map((story, i) => (
             <Card className="blog-story-card reveal" key={story._id || story.id} style={{ transitionDelay: `${i * 60}ms` }}>
-              {story.image ? (
-                <img src={story.image} alt={story.name} style={{ width: "100%", height: "200px", objectFit: "cover", display: "block" }} />
-              ) : (
-                <ImagePlaceholder label={story.name} ratio="16 / 10" />
-              )}
+              <div className="blog-story-card__media">
+                {story.image ? (
+                  <img 
+                    src={story.image} 
+                    alt={story.name} 
+                    onError={(e) => { e.target.style.display = 'none'; }} 
+                  />
+                ) : (
+                  <ImagePlaceholder label={story.name} />
+                )}
+              </div>
               <div className="blog-story-card__body">
                 <span className="blog-story-card__program">{story.program}</span>
                 <h3>{story.name}</h3>
@@ -46,11 +52,17 @@ export default function BlogPage() {
         <div className="blog-stories-grid">
           {blogs.map((post, i) => (
             <Card className="blog-story-card reveal" key={post._id || post.id} style={{ transitionDelay: `${i * 60}ms` }}>
-              {post.image ? (
-                <img src={post.image} alt={post.title} style={{ width: "100%", height: "200px", objectFit: "cover", display: "block" }} />
-              ) : (
-                <ImagePlaceholder label={post.title} ratio="16 / 10" />
-              )}
+              <div className="blog-story-card__media">
+                {post.image ? (
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    onError={(e) => { e.target.style.display = 'none'; }} 
+                  />
+                ) : (
+                  <ImagePlaceholder label={post.title} />
+                )}
+              </div>
               <div className="blog-story-card__body">
                 <span className="blog-story-card__program">{post.category}</span>
                 <h3>{post.title}</h3>

@@ -24,7 +24,7 @@ export default function ProgramsPage() {
 
   return (
     <>
-      <header className="page-hero">
+      <header className="page-hero programs-hero">
         <div className="container">
           <span className="page-hero__eyebrow">{t("nav.programs")}</span>
           <h1 className="page-hero__title">{t("programs.title")}</h1>
@@ -32,7 +32,7 @@ export default function ProgramsPage() {
         </div>
       </header>
 
-      <Section tone="base">
+      <Section tone="base" className="programs-section">
         <div className="programs-filter" role="group" aria-label="Filter programs by category">
           {categories.map((cat) => (
             <button
@@ -57,7 +57,7 @@ export default function ProgramsPage() {
             >
               <div className="program-detail-card__media">
                 {program.image ? (
-                  <img src={program.image} alt={program.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <img src={program.image} alt={program.name} />
                 ) : (
                   <ImagePlaceholder label={program.name} ratio="4 / 3" />
                 )}

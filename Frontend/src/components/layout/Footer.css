@@ -112,18 +112,11 @@
 }
 
 .footer__brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: #fff;
-  font-family: var(--font-hindi);
-  font-size: 0.9rem;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(15, 76, 129, 0.5);
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .footer__brand-text {

@@ -36,9 +36,7 @@ export default function Header() {
     <header className={`header ${isScrolled ? "header--scrolled" : ""}`}>
       <div className="container header__inner">
         <Link to="/" className="header__brand" onClick={() => setIsMenuOpen(false)}>
-          <span className="header__brand-mark" aria-hidden="true">
-            स्व
-          </span>
+          <img src="/images/logo.png" className="header__brand-mark" alt="Swasti Foundation Logo" />
           <span className="header__brand-text">
             Swasti Foundation
           </span>

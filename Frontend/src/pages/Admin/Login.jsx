@@ -31,7 +31,7 @@ export default function Login() {
       <div className="admin-login-glow"></div>
       <div className="admin-login-box">
         <div className="admin-login-header">
-          <div className="admin-login-logo">स्व</div>
+          <img src="/images/logo.png" className="admin-login-logo" alt="Swasti Foundation Logo" />
           <h1>Swasti Admin Portal</h1>
           <p>Sign in to manage website contents and submissions</p>
         </div>
