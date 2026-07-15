@@ -12,7 +12,7 @@ export function OrgDataProvider({ children }) {
     async function loadData() {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
       try {
-        const [settings, programs, stories, gallery, events, blogs, team] = await Promise.all([
+        const [settings, programs, stories, gallery, events, blogs, team, volunteerTeam] = await Promise.all([
           fetch(`${apiBaseUrl}/settings`).then(r => {
             if (!r.ok) throw new Error("Settings fetch failed");
             return r.json();
@@ -40,6 +40,10 @@ export function OrgDataProvider({ children }) {
           fetch(`${apiBaseUrl}/team`).then(r => {
             if (!r.ok) throw new Error("Team fetch failed");
             return r.json();
+          }),
+          fetch(`${apiBaseUrl}/volunteer-team`).then(r => {
+            if (!r.ok) throw new Error("Volunteer team fetch failed");
+            return r.json();
           })
         ]);
 
@@ -53,7 +57,8 @@ export function OrgDataProvider({ children }) {
           gallery,
           events,
           blogs,
-          team
+          team,
+          volunteerTeam
         });
       } catch (err) {
         console.error("OrgDataProvider failed to load startup data:", err);

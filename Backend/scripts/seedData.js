@@ -6,6 +6,7 @@ const Settings = require('../model/settings');
 const Program = require('../model/program');
 const Story = require('../model/story');
 const TeamMember = require('../model/teamMember');
+const VolunteerMember = require('../model/volunteerMember');
 
 const defaultSettings = {
   orgInfo: {
@@ -138,6 +139,12 @@ const defaultTeam = [
   { name: "Anjili", role: "Treasurer" }
 ];
 
+const defaultVolunteers = [
+  { name: "Ashwini", role: "Event Management" },
+  { name: "Krishna Garg", role: "Technical Coordinator" },
+  { name: "Aditya Kumar", role: "Technical Coordinator" }
+];
+
 async function seed() {
   await main();
   console.log("Connected to MongoDB for seeding...");
@@ -170,6 +177,11 @@ async function seed() {
   await TeamMember.deleteMany({});
   await TeamMember.insertMany(defaultTeam);
   console.log("Default leadership team members successfully seeded.");
+
+  // Seed Volunteer Team Members
+  await VolunteerMember.deleteMany({});
+  await VolunteerMember.insertMany(defaultVolunteers);
+  console.log("Default volunteer team members successfully seeded.");
 
   mongoose.connection.close();
   console.log("Database connection closed. Seeding complete!");

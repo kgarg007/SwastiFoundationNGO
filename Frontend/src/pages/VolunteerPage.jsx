@@ -10,7 +10,7 @@ import "./VolunteerPage.css";
 
 export default function VolunteerPage() {
   const { t } = useLanguage();
-  const { team } = useOrgData();
+  const { volunteerTeam } = useOrgData();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -125,7 +125,7 @@ export default function VolunteerPage() {
       <Section tone="alt">
         <SectionHeading title={t("volunteer.teamTitle")} />
         <div className="volunteer-team-grid">
-          {team.map((v, i) => (
+          {volunteerTeam && volunteerTeam.map((v, i) => (
             <div className="volunteer-team-card reveal" key={v._id || v.name} style={{ transitionDelay: `${i * 60}ms` }}>
               <div className="volunteer-team-card__avatar" aria-hidden="true">
                 {v.image ? (

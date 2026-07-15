@@ -22,6 +22,8 @@ app.use('/blog', require('./routes/blog'));
 app.use('/settings', require('./routes/settings'));
 app.use('/submissions', require('./routes/submissions'));
 app.use('/team', require('./routes/team'));
+app.use('/volunteer-team', require('./routes/volunteerTeam'));
+
 
 
 
