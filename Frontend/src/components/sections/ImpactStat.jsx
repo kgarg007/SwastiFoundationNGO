@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useCountUp } from "../../hooks/useCountUp";
 import { iconMap } from "../ui/icons";
+import "./ImpactNumbers.css";
+
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
