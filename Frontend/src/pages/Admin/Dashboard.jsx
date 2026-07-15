@@ -312,7 +312,7 @@ export default function Dashboard() {
         if (hasImage) {
           updateData.append('image', formData.get('image'));
         }
-        await api.put(`/blogs/${id}`, updateData, true);
+        await api.put(`/blog/${id}`, updateData, true);
         setSuccessMsg('Blog post updated successfully!');
       } else {
         await api.post('/blog', formData, true);
@@ -501,7 +501,7 @@ export default function Dashboard() {
             Blog & News
           </button>
           <button className={activeTab === 'team' ? 'active' : ''} onClick={() => { setActiveTab('team'); setShowAddForm(false); setCurrentEditItem(null); }}>
-            Volunteer Team
+            Leadership Team
           </button>
           <button className={activeTab === 'submissions' ? 'active' : ''} onClick={() => { setActiveTab('submissions'); setShowAddForm(false); setCurrentEditItem(null); }}>
             Submissions Inbox
@@ -1087,20 +1087,20 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* VOLUNTEER TEAM LIST */}
+          {/* LEADERSHIP TEAM LIST */}
           {activeTab === 'team' && (
             <div>
               <div className="tab-actions">
                 {!showAddForm && (
                   <button className="btn-admin-action" onClick={() => { setShowAddForm(true); setCurrentEditItem(null); }}>
-                    Add team member
+                    Add leadership member
                   </button>
                 )}
               </div>
 
               {showAddForm || currentEditItem ? (
                 <form onSubmit={handleTeamMemberSubmit} className="admin-settings-form">
-                  <h2>{currentEditItem ? 'Edit team member' : 'Add new team member'}</h2>
+                  <h2>{currentEditItem ? 'Edit leadership member' : 'Add new leadership member'}</h2>
                   <div className="form-grid">
                     <label>
                       <span>Member Name</span>
@@ -1111,8 +1111,14 @@ export default function Dashboard() {
                       <input type="text" name="role" required defaultValue={currentEditItem?.role || ''} />
                     </label>
                     <label>
-                      <span>Profile Picture</span>
+                      <span>Profile Picture {currentEditItem && '(Leave empty to keep existing)'}</span>
                       <input type="file" name="image" accept="image/*" />
+                      {currentEditItem?.image && (
+                        <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <span style={{ fontSize: '12px', color: 'var(--admin-text-muted)' }}>Current:</span>
+                          <img src={currentEditItem.image} alt={currentEditItem.name} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} />
+                        </div>
+                      )}
                     </label>
                   </div>
                   <div className="btn-group">

@@ -128,9 +128,14 @@ const defaultStories = [
 ];
 
 const defaultTeam = [
-  { name: "Ashwini", role: "Event Management" },
-  { name: "Krishna Garg", role: "Technical Coordinator" },
-  { name: "Aditya Kumar", role: "Technical Coordinator" }
+  { name: "Shailesh Shastri", role: "Chairperson" },
+  { name: "Veena Jajoria", role: "President" },
+  { name: "Mukesh Kumar", role: "Vice President" },
+  { name: "Neetu Kumari", role: "Vice President" },
+  { name: "Varun Singh Rathore", role: "Vice-Chairperson" },
+  { name: "Dr. Devesh Arya", role: "Vice-Chairperson" },
+  { name: "Archana Singh", role: "General Secretary" },
+  { name: "Anjili", role: "Treasurer" }
 ];
 
 async function seed() {
@@ -161,14 +166,10 @@ async function seed() {
     console.log("Stories already exist in database.");
   }
 
-  // Seed Team Members
-  const teamCount = await TeamMember.countDocuments();
-  if (teamCount === 0) {
-    await TeamMember.insertMany(defaultTeam);
-    console.log("Default team members successfully seeded.");
-  } else {
-    console.log("Team members already exist in database.");
-  }
+  // Seed Team Members (Clear and re-insert to reflect leadership list)
+  await TeamMember.deleteMany({});
+  await TeamMember.insertMany(defaultTeam);
+  console.log("Default leadership team members successfully seeded.");
 
   mongoose.connection.close();
   console.log("Database connection closed. Seeding complete!");

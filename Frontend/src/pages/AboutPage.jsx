@@ -14,8 +14,10 @@ function formatDate(dateStr) {
 
 export default function AboutPage() {
   const { t } = useLanguage();
-  const { orgInfo, aboutContent, founderMessage } = useOrgData();
+  const { orgInfo, aboutContent, founderMessage, team } = useOrgData();
   useReveal();
+
+  const teamToRender = team && team.length > 0 ? team : leadershipTeam;
 
   return (
     <>
@@ -79,10 +81,14 @@ export default function AboutPage() {
       <Section tone="alt">
         <SectionHeading title={t("about.leadershipTitle")} />
         <div className="leadership-grid">
-          {leadershipTeam.map((member, i) => (
-            <div className="leadership-card reveal" key={member.name} style={{ transitionDelay: `${i * 40}ms` }}>
-              <div className="leadership-card__avatar" aria-hidden="true">
-                {member.name.charAt(0)}
+          {teamToRender.map((member, i) => (
+            <div className="leadership-card reveal" key={member._id || member.name} style={{ transitionDelay: `${i * 40}ms` }}>
+              <div className="leadership-card__avatar" aria-hidden="true" style={{ overflow: 'hidden' }}>
+                {member.image ? (
+                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                ) : (
+                  member.name.charAt(0)
+                )}
               </div>
               <h3 className="leadership-card__name">{member.name}</h3>
               <p className="leadership-card__role">{member.role}</p>
