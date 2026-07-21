@@ -31,7 +31,7 @@ export default function FeaturedPrograms() {
               <span className="program-card__category">{program.category}</span>
               <h3 className="program-card__title">{program.name}</h3>
               <p className="program-card__desc">{program.description}</p>
-              <Button to={`/programs#${program._id || program.id}`} variant="ghost" size="sm">
+              <Button to={`/programs#${program._id || program.id}`} variant="ghost" size="sm" className="program-card__button">
                 {t("common.readMore")} →
               </Button>
             </div>
