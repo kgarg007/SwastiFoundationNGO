@@ -40,6 +40,10 @@
   );
 }
 
+/*
+ * Root cause fix 4: Glow effect had fixed width: 60vw with filter: blur(120px),
+ * causing blurred radial glow to extend past 100vw on mobile.
+ */
 .hero__bg-glow {
   position: absolute;
   top: 20%;
@@ -64,13 +68,12 @@
 
 .hero__content {
   max-width: 860px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: var(--space-3xl);
 }
-
-
 
 .hero__eyebrow {
   display: inline-block;
@@ -82,6 +85,12 @@
   margin-bottom: var(--space-sm);
 }
 
+/*
+ * Root cause fix 2: Hindi heading ("नर सेवा ही नारायण सेवा है।") was overflowing container on narrow screens (320px-480px)
+ * because desktop font-size --fs-display-xl (44px) was too large for 320px containers.
+ * Fixed by using white-space: normal, max-width: 100%, and responsive font scaling only on small screens (<=768px).
+ * Text wraps naturally ONLY at word boundaries without breaking Devanagari words unnaturally.
+ */
 .hero__headline {
   font-family: var(--font-display);
   font-size: var(--fs-display-xl);
@@ -90,6 +99,8 @@
   line-height: var(--lh-tight);
   margin-bottom: var(--space-xs);
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  white-space: normal;
+  max-width: 100%;
 }
 
 .hero__translation {
@@ -100,6 +111,7 @@
   font-size: var(--fs-display-sm);
   margin-bottom: var(--space-lg);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
 }
 
 .hero__sub {
@@ -107,6 +119,7 @@
   color: rgba(255, 255, 255, 0.8);
   line-height: var(--lh-relaxed);
   max-width: 680px;
+  width: 100%;
   margin-bottom: var(--space-xl);
 }
 
@@ -115,6 +128,7 @@
   gap: var(--space-md);
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .hero__btn-secondary {
@@ -144,6 +158,10 @@
   width: 100%;
 }
 
+/*
+ * Root cause fix 3: Statistic cards layout & padding on mobile.
+ * Adjusted card padding on small screens to fit neatly without overlap or clipping.
+ */
 .hero__stat-card {
   display: flex;
   flex-direction: column;
@@ -180,6 +198,10 @@
 }
 
 @media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+  }
+
   .hero__stats-wrapper {
     position: relative;
     bottom: 0;
@@ -192,8 +214,53 @@
     min-height: auto;
     padding-block: calc(var(--header-height) + var(--space-xl)) var(--space-xl);
   }
+
+  /*
+   * Mobile Hero Image Focal Point:
+   * On portrait mobile screens, background-position: 75% 35% positions the key emotional subject
+   * (the child's smiling face and warm expression) directly in view, avoiding awkward cropping
+   * of raised hands/background elements without zooming or distorting the image.
+   */
+  .hero__bg-image {
+    background-position: 75% 35%;
+  }
+
+  .hero__headline {
+    font-size: clamp(1.75rem, 7vw, 2.75rem);
+    line-height: 1.25;
+  }
   
   .hero__stats {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .hero__bg-glow {
+    width: 90%;
+    max-width: 100%;
+    left: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__bg-image {
+    background-position: 72% 35%;
+  }
+
+  .hero__content {
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__stat-card {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .hero__ctas {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
   }
 }

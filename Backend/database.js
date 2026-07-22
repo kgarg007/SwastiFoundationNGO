@@ -8,7 +8,13 @@ const main = async () => {
         console.warn("Failed to set DNS servers:", e.message);
     }
 
-    await mongoose.connect(process.env.MONGODB_URL);
+    let mongoUrl = process.env.MONGODB_URL || '';
+    if (mongoUrl) {
+        // Fix double-slash typos in db path (e.g., .net//SwastiFoundation -> .net/SwastiFoundation)
+        mongoUrl = mongoUrl.replace(/([^:]\/)\/+/g, '$1');
+    }
+
+    await mongoose.connect(mongoUrl);
 }
 
 module.exports = main;
