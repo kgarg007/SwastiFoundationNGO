@@ -40,7 +40,9 @@ const settingsSchema = new Schema({
     founderName: { type: String, default: "Shailesh Shastri" },
     founderTitle: { type: String, default: "Founder, Swasti Foundation" },
     letter: { type: [String], default: [] },
-    closing: { type: String, default: "With sincere regards," }
+    closing: { type: String, default: "With sincere regards," },
+    founderImage: { type: String },
+    imagePublicId: { type: String }
   },
   impactStats: {
     type: [{

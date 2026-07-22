@@ -125,13 +125,16 @@ export default function AboutPage() {
 
       <Section tone="deep" id="founders-desk">
         <div className="founders-desk reveal">
-          <div className="founders-desk__portrait" aria-hidden="true">
-            {/* TODO: Replace with actual NGO image (founder portrait) */}
-            <span>{founderMessage.founderName.charAt(0)}</span>
+          <div className="founders-desk__portrait" aria-hidden="true" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {founderMessage.founderImage ? (
+              <img src={founderMessage.founderImage} alt={founderMessage.founderName} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            ) : (
+              <span>{founderMessage.founderName.charAt(0)}</span>
+            )}
           </div>
           <div className="founders-desk__content">
             <span className="founders-desk__eyebrow">Message from the Founder's Desk</span>
-            {founderMessage.letter.map((paragraph, i) => (
+            {((founderMessage.letter || []).flatMap(p => p.split(/\r?\n/)).map(p => p.trim()).filter(Boolean)).map((paragraph, i) => (
               <p key={i} className={i === 0 ? "founders-desk__salutation" : ""}>
                 {paragraph}
               </p>

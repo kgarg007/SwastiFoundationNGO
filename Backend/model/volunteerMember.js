@@ -15,6 +15,9 @@ const volunteerMemberSchema = new Schema({
   },
   imagePublicId: {
     type: String
+  },
+  linkedin: {
+    type: String
   }
 }, { timestamps: true });
 

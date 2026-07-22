@@ -142,3 +142,25 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.volunteer-team-card__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-surface-alt, #f3f6f8);
+  color: #0077b5; /* LinkedIn Signature Color */
+  border: 1px solid rgba(0, 119, 181, 0.15);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.volunteer-team-card__social:hover {
+  background: #0077b5;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 119, 181, 0.25);
+}

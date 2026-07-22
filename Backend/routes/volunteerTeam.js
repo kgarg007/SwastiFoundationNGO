@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 // POST create volunteer team member (Protected)
 router.post('/', auth, upload.single('image'), async (req, res) => {
   try {
-    const { name, role } = req.body;
+    const { name, role, linkedin } = req.body;
     if (!name || !role) {
       if (req.file) fs.unlinkSync(req.file.path);
       return res.status(400).json({ error: 'Name and Role are required fields.' });
@@ -43,7 +43,8 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
       name,
       role,
       image,
-      imagePublicId
+      imagePublicId,
+      linkedin: linkedin || ''
     });
 
     await newMember.save();
@@ -59,7 +60,7 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
 // PUT update volunteer team member (Protected)
 router.put('/:id', auth, upload.single('image'), async (req, res) => {
   try {
-    const { name, role } = req.body;
+    const { name, role, linkedin } = req.body;
     const member = await VolunteerMember.findById(req.params.id);
     if (!member) {
       if (req.file) fs.unlinkSync(req.file.path);
@@ -68,6 +69,7 @@ router.put('/:id', auth, upload.single('image'), async (req, res) => {
 
     if (name) member.name = name;
     if (role) member.role = role;
+    if (linkedin !== undefined) member.linkedin = linkedin;
 
     if (req.file) {
       const cloudinaryRes = await uploadOnCloudinary(req.file.path);

@@ -1,0 +1,32 @@
+feat: enhance stories & news, gallery layout, settings media upload, and volunteer linkedin integration
+
+Frontend:
+- Blog & News Page:
+  - Created a responsive 'ArticleModal' component to view complete articles/stories in a blurred backdrop overlay.
+  - Implemented keyboard listeners (Escape key) and body scroll locking when the modal is active.
+  - Standardized all cards in the grid to maintain uniform equal height and width constraints.
+  - Added line-clamping on card titles (max 2 lines) and excerpts (max 2 lines with ellipsis '...') to prevent text shifts.
+  - Placed 'Read Article' and 'Read Story' buttons pinned to the card footers.
+  - Restructured layout using alternating section tones (tone="base" and tone="alt") for clean visual boundaries.
+- Founder Message & Site Settings:
+  - Added form-data upload support for 'founderImage' inside Admin settings dashboard.
+  - Rendered the founder's profile picture inside the home page green circle and the about page portrait frame.
+  - Added robust flatMap parser on both pages to split text paragraphs safely on newlines.
+- Gallery Page:
+  - Enabled dynamic aspect-ratio support on card items (1:1, 4:3, 3:4) using saved ratio metadata.
+  - Encased cards in a framed white border, with tight padding (6px on desktop, 5px on mobile) and custom shadows.
+  - Created a fully interactive full-screen Lightbox slider with navigation arrows and keyboard controls (Left/Right/Esc).
+  - Improved responsiveness: configured grid to stack cards to a single column under 480px width.
+- Volunteer Team Page:
+  - Rendered a branded LinkedIn social icon button on volunteer cards linking to their profile.
+  - Styled hover states with blue fill backgrounds, translation shifts, and shadow lifts.
+  - Included a LinkedIn profile URL field in the Admin team form.
+
+Backend:
+- Settings:
+  - Added 'founderImage' and 'imagePublicId' properties to Settings Schema.
+  - Integrated multer and Cloudinary upload support inside PUT /settings route.
+  - Added a regular expression split parser (/\r?\n\r?\n/) to support CRLF and LF newlines during settings save.
+- Volunteer Member:
+  - Added 'linkedin' URL string property to VolunteerMember Schema.
+  - Updated POST and PUT volunteer routes to read and store volunteer LinkedIn profile links.

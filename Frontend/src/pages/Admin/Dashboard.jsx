@@ -354,59 +354,21 @@ export default function Dashboard() {
     setErrorMsg('');
 
     const formData = new FormData(e.target);
-    
-    const impactStatsData = [
-      { id: "children-educated" },
-      { id: "ration-distributed" },
-      { id: "states-reached" },
-      { id: "cleanliness-kits" }
-    ].map(item => ({
-      id: item.id,
-      label: formData.get(`impact_${item.id}_label`),
-      value: parseInt(formData.get(`impact_${item.id}_value`)) || 0,
-      suffix: formData.get(`impact_${item.id}_suffix`) || ''
-    }));
-
-    // Parse values from form
-    const body = {
-      orgInfo: {
-        name: formData.get('org_name'),
-        tagline: formData.get('org_tagline'),
-        taglineTranslation: formData.get('org_taglineTrans'),
-        foundedDate: formData.get('org_foundedDate'),
-        foundedYear: parseInt(formData.get('org_foundedYear')) || 2020,
-        registrationNumber: formData.get('org_regNum'),
-        type: formData.get('org_type'),
-        officeAddress: formData.get('org_address'),
-        email: formData.get('org_email'),
-        phone: formData.get('org_phone'),
-        whatsappNumber: formData.get('org_whatsapp'),
-        social: {
-          facebook: formData.get('social_fb'),
-          instagram: formData.get('social_ig'),
-          youtube: formData.get('social_yt')
-        }
-      },
-      aboutContent: {
-        whyFounded: formData.get('about_whyFounded'),
-        problem: formData.get('about_problem'),
-        founderStory: formData.get('about_founderStory'),
-        inspiration: formData.get('about_inspiration'),
-        mission: formData.get('about_mission'),
-        vision: formData.get('about_vision'),
-        visionExtended: formData.get('about_visionExtended'),
-      },
-      founderMessage: {
-        founderName: formData.get('founder_name'),
-        founderTitle: formData.get('founder_title'),
-        letter: formData.get('founder_letter').split('\n\n').filter(p => p.trim() !== ''),
-        closing: formData.get('founder_closing')
-      },
-      impactStats: impactStatsData
-    };
+    const hasFounderImage = formData.get('founderImage')?.name !== '';
 
     try {
-      await api.put('/settings', body);
+      const updateData = new FormData();
+      for (const [key, value] of formData.entries()) {
+        if (key === 'founderImage') {
+          if (hasFounderImage) {
+            updateData.append('founderImage', value);
+          }
+        } else {
+          updateData.append(key, value);
+        }
+      }
+
+      await api.put('/settings', updateData, true);
       setSuccessMsg('Settings updated successfully!');
       fetchData();
     } catch (err) {
@@ -603,7 +565,7 @@ export default function Dashboard() {
 
           {/* SITE SETTINGS */}
           {activeTab === 'settings' && (
-            <form onSubmit={handleSettingsSubmit} className="admin-settings-form">
+            <form onSubmit={handleSettingsSubmit} className="admin-settings-form" encType="multipart/form-data">
               <section className="settings-section">
                 <h2>NGO general information</h2>
                 <div className="form-grid">
@@ -720,6 +682,15 @@ export default function Dashboard() {
                   <label>
                     <span>Closing title</span>
                     <input type="text" name="founder_closing" defaultValue={settings.founderMessage.closing || ''} />
+                  </label>
+                  <label>
+                    <span>Founder Profile Image (Leave empty to keep existing)</span>
+                    <input type="file" name="founderImage" accept="image/*" />
+                    {settings.founderMessage?.founderImage && (
+                      <span style={{ fontSize: '11px', color: '#10b981', display: 'block', marginTop: '4px' }}>
+                        Current Image: <a href={settings.founderMessage.founderImage} target="_blank" rel="noreferrer">View image</a>
+                      </span>
+                    )}
                   </label>
                   <label className="full-width">
                     <span>Founder Letter paragraphs (separate paragraphs with blank double enters)</span>
@@ -1260,6 +1231,10 @@ export default function Dashboard() {
                           <img src={currentEditItem.image} alt={currentEditItem.name} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} />
                         </div>
                       )}
+                    </label>
+                    <label>
+                      <span>LinkedIn Profile URL</span>
+                      <input type="url" name="linkedin" placeholder="https://linkedin.com/in/username" defaultValue={currentEditItem?.linkedin || ''} />
                     </label>
                   </div>
                   <div className="btn-group">

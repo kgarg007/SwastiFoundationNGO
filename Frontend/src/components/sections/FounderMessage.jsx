@@ -8,17 +8,25 @@ export default function FounderMessage() {
   const { t } = useLanguage();
   const { founderMessage } = useOrgData();
 
-  const quote = founderMessage.letter && founderMessage.letter.length > 1 ? founderMessage.letter[1] : "";
-  const bodyText = founderMessage.letter && founderMessage.letter.length > 2 ? founderMessage.letter[2] : "";
+  const letterParagraphs = (founderMessage.letter || [])
+    .flatMap(p => p.split(/\r?\n/))
+    .map(p => p.trim())
+    .filter(Boolean);
+
+  const quote = letterParagraphs.length > 1 ? letterParagraphs[1] : "";
+  const bodyText = letterParagraphs.length > 2 ? letterParagraphs[2] : "";
 
   return (
     <Section tone="alt">
       <div className="founder-message reveal">
         <div className="founder-message__portrait">
-          {/* TODO: Replace with actual NGO image */}
-          <div className="founder-message__placeholder" aria-hidden="true">
-            <span>"</span>
-          </div>
+          {founderMessage.founderImage ? (
+            <img src={founderMessage.founderImage} alt={founderMessage.founderName} className="founder-message__img" />
+          ) : (
+            <div className="founder-message__placeholder" aria-hidden="true">
+              <span>"</span>
+            </div>
+          )}
         </div>
         <div className="founder-message__content">
           <span className="founder-message__eyebrow">{t("home.founderTitle")}</span>
